@@ -477,7 +477,7 @@ public class ProGuardMojo extends AbstractMojo {
 						libraryJars.add(file);
 					} else {
 						args.add("-libraryjars");
-						args.add(fileToString(file));
+						args.add(fileToString(file) + "(!META-INF/versions/**)");
 					}
 				}
 			}
@@ -532,7 +532,7 @@ public class ProGuardMojo extends AbstractMojo {
 						libraryJars.add(file);
 					} else {
 						args.add("-libraryjars");
-						args.add(fileToString(file));
+						args.add(fileToString(file) + "(!META-INF/versions/**)");
 					}
 				}
 			}
@@ -567,7 +567,7 @@ public class ProGuardMojo extends AbstractMojo {
 					libraryJars.add(new File(lib));
 				} else {
 					args.add("-libraryjars");
-					args.add(fileNameToString(lib));
+					args.add(fileNameToString(lib) + "(!META-INF/versions/**)");
 				}
 			}
 		}
@@ -594,7 +594,7 @@ public class ProGuardMojo extends AbstractMojo {
 				}
 			}
 			args.add("-libraryjars");
-			args.add(fileToString(tempLibraryjarsDir));
+			args.add(fileToString(tempLibraryjarsDir) + "(!META-INF/versions/**)");
 		}
 
 		args.add("-printmapping");
@@ -804,7 +804,6 @@ public class ProGuardMojo extends AbstractMojo {
 		for (String arg : argsList) {
 			java.createArg().setValue(arg);
 		}
-
 		int result = java.executeJava();
 		if (result != 0) {
 			throw new MojoExecutionException("Obfuscation failed (result=" + result + ")");
